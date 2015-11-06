@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Signup{% endblock title %}
+{% block content %}
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <div class="card card-block">
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        <i class="fa fa-exclamation-triangle"></i>&nbsp;
+                        {% for error in form.non_field_errors %}
+                            {{error}}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <form novalidate id="signup-form" method="post" action=".">
+                    {% for field in form %}
+                        <div class="form-group{% if field.errors %} has-error{% endif %}">
+                            <label class="control-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            {{ field }}
+                            {% if field.errors %}
+                                <small class="text-danger">
+                                    {% for error in field.errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                </small>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    <button id="signup-form-submit" class="btn btn-primary">Sign up</button>
+                    {% csrf_token %}
+                </form> 
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+    
