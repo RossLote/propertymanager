@@ -1,8 +1,7 @@
 from django.db import models
-from common.models import UUIDObject
-from softdelete.models import SoftDeleteObject, SoftDeleteManager
 from django_extensions.db.fields import AutoSlugField
 from django.conf import settings
+
 
 def my_import(name):
     components = name.split('.')
@@ -40,7 +39,6 @@ class TeamManager(BaseManagerClass):
         return team
 
 
-# Create your models here.
 class Team(BaseTeamClass):
     name = models.CharField(max_length=255)
     slug = AutoSlugField(populate_from='name')

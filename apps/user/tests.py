@@ -290,8 +290,8 @@ class EmailUserCreationFormTest(TestCase):
             'email': 'jsmith@example.com',
             'password1': 'test123',
             'password2': 'test123',
-            'first_name' : 'Jane',
-            'last_name' : 'Doe'
+            'first_name': 'Jane',
+            'last_name': 'Doe'
         }
         form = EmailUserCreationForm(data)
         self.assertTrue(form.is_valid())
@@ -301,7 +301,7 @@ class EmailUserCreationFormTest(TestCase):
 
 @override_settings(USE_TZ=False, PASSWORD_HASHERS=('django.contrib.auth.hashers.SHA1PasswordHasher',))
 class EmailUserChangeFormTest(TestCase):
-    
+
     def setUp(self):
         user = get_user_model().objects.create_user(
             'testclient@example.com',
@@ -469,16 +469,16 @@ class EmailUserAdminTest(TestCase):
 
 
 class TestViews(TestCase):
-    
+
     first_name = 'Bat'
     last_name = 'Man'
     email = 'batman@cave.com'
     password = 'alfred1'
-    
+
     def setUp(self):
         self.request = HttpRequest()
-        
-    
+
+
     def test_signup_view_renders_correct_html(self):
         self.request.user = mock.Mock()
         self.request.user.is_authenticated.return_value=False
@@ -487,18 +487,17 @@ class TestViews(TestCase):
         response = views.SignUp.as_view()(self.request)
         response.render()
         self.assertEqual(html, response.content)
-        
+
     def test_signup_view_creates_user(self):
         self.client.get('/signup/')
         data = {
             'email': 'batman@cave.com',
-            'first_name' : 'Bruce',
-            'last_name' : 'Wayne',
-            'password1' : 'alfred1',
-            'password2' : 'alfred1',
+            'first_name': 'Bruce',
+            'last_name': 'Wayne',
+            'password1': 'alfred1',
+            'password2': 'alfred1',
         }
         self.client.post('/signup/', data)
         user = get_user_model().objects.get(email=data['email'])
         self.assertEqual(user.email, data['email'])
         self.assertEqual(unicode(user.pk), unicode(self.client.session['_auth_user_id']))
-        

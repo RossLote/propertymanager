@@ -52,6 +52,7 @@ LOCAL_APPS = (
     'propertymanager',
     'user',
     'teams',
+    'functionaltest',
 )
 
 PROJECT_NAME = 'property manager'
@@ -74,7 +75,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -121,6 +122,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'user.EmailUser'
+SIGNUP_REDIRECT = '/'
+
 TEAM = {
     'team_base_class': 'common.models.UUIDObject',
     'team_user_base_class': 'common.models.UUIDObject',

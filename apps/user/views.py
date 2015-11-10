@@ -1,9 +1,5 @@
-from django.http import JsonResponse
 from django.conf import settings
-from django.core.urlresolvers import reverse, reverse_lazy
-from django.shortcuts import render
 from django.views.generic import CreateView
-from django.contrib.auth.views import logout as django_logout
 from django.contrib.auth import login, authenticate
 from braces.views import AnonymousRequiredMixin
 from . import forms, models
@@ -14,7 +10,7 @@ class SignUp(AnonymousRequiredMixin, CreateView):
     template_name = 'user/signup.html'
     model = models.EmailUser
     success_url = settings.SIGNUP_REDIRECT
-    
+
     def form_valid(self, form):
         response = super(SignUp, self).form_valid(form)
         user = authenticate(
