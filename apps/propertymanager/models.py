@@ -65,3 +65,6 @@ class Tenancy(UUIDObject):
     tenant = models.ForeignKey('Tenant', related_name='tenancies')
     start_date = models.DateField(blank=True)
     end_date = models.DateField(blank=True)
+
+    class Meta:
+        verbose_name_plural = 'Tenancies'
