@@ -10,5 +10,5 @@ def get_teams_owned(self):
     return models.Team.objects.filter(teamowner__teamuser__user=self)
 
 
-get_user_model().add_to_class('get_teams', get_teams)
-get_user_model().add_to_class('get_teams_owned', get_teams_owned)
+get_user_model().add_to_class('teams', get_teams)
+get_user_model().add_to_class('teams_owned', get_teams_owned)
