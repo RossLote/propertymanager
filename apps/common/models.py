@@ -17,10 +17,10 @@ class TimeStampedModel(models.Model):
         get_latest_by = 'modified'
         ordering = ('-modified', '-created',)
         abstract = True
-
+ 
 
 class UUIDObject(TimeStampedModel, SoftDeleteObject):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
     class Meta:
         abstract = True

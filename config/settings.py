@@ -16,8 +16,8 @@ import sys
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-sys.path.insert(0, os.path.join(BASE_DIR, "apps"))
-sys.path.insert(0, os.path.join(BASE_DIR, "vendor"))
+sys.path.insert(1, os.path.join(BASE_DIR, "apps"))
+sys.path.insert(1, os.path.join(BASE_DIR, "vendor"))
 
 
 # Quick-start development settings - unsuitable for production
@@ -46,13 +46,16 @@ DJANGO_APPS = (
 
 EXTERNAL_APPS = (
     'softdelete',
+    'rest_framework',
 )
 
 LOCAL_APPS = (
     'gallery',
-    'propertymanager',
+    'properties',
+    'contacts',
     'user',
     'teams',
+    'dashboard',
     'functionaltest',
 )
 

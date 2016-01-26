@@ -20,4 +20,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^', include('user.urls', namespace='user')),
     url(r'^', include('website.urls', namespace='website')),
+    url(r'^', include('contacts.urls', namespace='contacts')),
+    url(r'^', include('properties.urls', namespace='properties')),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
