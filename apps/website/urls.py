@@ -5,6 +5,6 @@ from . import views
 
 urlpatterns = [
     url(r'^$',
-        TemplateView.as_view(template_name='website/home.html'),
+        TemplateView.as_view(template_name='website/index.html'),
         name='password_reset_complete'),
 ]
