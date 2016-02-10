@@ -47,6 +47,7 @@ DJANGO_APPS = (
 EXTERNAL_APPS = (
     'softdelete',
     'rest_framework',
+    'debug_toolbar',
 )
 
 LOCAL_APPS = (
@@ -65,6 +66,7 @@ PROJECT_NAME = 'property manager'
 INSTALLED_APPS = DJANGO_APPS+EXTERNAL_APPS+LOCAL_APPS
 
 MIDDLEWARE_CLASSES = (
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -73,7 +75,11 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'teams.middleware.TeamSubdomainMiddleware',
 )
+
+DEBUG_TOOLBAR_PATCH_SETTINGS = False
+INTERNAL_IPS = ['127.0.0.1']
 
 ROOT_URLCONF = 'config.urls'
 
@@ -133,4 +139,10 @@ TEAM = {
     'team_base_class': 'common.models.UUIDObject',
     'team_user_base_class': 'common.models.UUIDObject',
     'team_manage_base_class': 'softdelete.model.SoftDeleteManager',
+}
+
+SESSION_COOKIE_DOMAIN = '.propertymanager.com'
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',)
 }

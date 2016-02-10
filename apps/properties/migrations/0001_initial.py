@@ -32,8 +32,22 @@ class Migration(migrations.Migration):
                 ('postcode', models.CharField(max_length=8)),
                 ('country', models.CharField(choices=[(b'GBR', 'United Kingdom'), (b'USA', 'United States of America')], max_length=3)),
                 ('gallery', models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='properties', to='gallery.Gallery')),
-                ('ownder', models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='properties', to='contacts.Owner')),
+                ('owner', models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='properties', to='contacts.Owner')),
                 ('team', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='properties', to='teams.Team')),
+            ],
+            options={
+                'abstract': False,
+            },
+        ),
+        migrations.CreateModel(
+            name='Unit',
+            fields=[
+                ('deleted_at', models.DateTimeField(blank=True, default=None, editable=False, null=True)),
+                ('created', models.DateTimeField(auto_now_add=True, verbose_name='created')),
+                ('modified', models.DateTimeField(auto_now=True, verbose_name='modified')),
+                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
+                ('property', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='units', to='properties.Property')),
+                ('team', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='units', to='teams.Team')),
             ],
             options={
                 'abstract': False,
@@ -48,7 +62,7 @@ class Migration(migrations.Migration):
                 ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
                 ('start_date', models.DateField(blank=True)),
                 ('end_date', models.DateField(blank=True)),
-                ('property', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='tenancies', to='properties.Property')),
+                ('unit', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='tenancies', to='properties.Unit')),
                 ('team', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='tenancies', to='teams.Team')),
                 ('tenant', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='tenancies', to='contacts.Tenant')),
             ],

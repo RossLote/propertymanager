@@ -1,16 +1,8 @@
 from rest_framework import viewsets
 from . import models, serializers
+from teams.api import TeamedObjectViewsetMixin
 
 
-class TeamedObjectViewsetMixin(object):
-
-    def get_queryset(self):
-
-        return self.queryset.filter(
-            team__users__user=self.request.user
-        )
-
-\
 class OwnerViewset(TeamedObjectViewsetMixin, viewsets.ModelViewSet):
 
     queryset = models.Owner.objects.all()

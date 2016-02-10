@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 from common.models import UUIDObject
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -28,8 +30,8 @@ class Image(UUIDObject):
         default=None, null=True, blank=True
     )
     image = models.ImageField(
-        _('Original Image'),
-        upload_to='catalogue/product'
+        _('Image'),
+        upload_to='gallery/images'
     )
     gallery = models.ForeignKey(
         Gallery, verbose_name=_('Gallery'),

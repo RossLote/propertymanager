@@ -1,0 +1,7 @@
+<h1>Properties</h1>
+<a class="btn btn-primary" href="#/properties/add">Add New Property</a>
+<ul>
+    <li ng-repeat="property in properties">
+        <a href="#/properties/{{property.id}}/units">{{property.name}}</a>
+    </li>
+</ul>
