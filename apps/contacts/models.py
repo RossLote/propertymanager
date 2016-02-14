@@ -2,7 +2,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 
-from common.models import UUIDObject
+from common.models import UUIDObject, TimeStampedSoftDeleteObject
 from phonenumber_field.modelfields import PhoneNumberField
 from softdelete.models import SoftDeleteObject, SoftDeleteManager
 from .utils import TITLE_LIST

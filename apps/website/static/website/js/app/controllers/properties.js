@@ -11,8 +11,8 @@
             templateUrl: base+'new.html',
             controller: 'PropertiesAddCtrl'
           }).
-          when('/properties/:id/edit', {
-            templateUrl: base+'new.html',
+          when('/properties/:propertyID/edit', {
+            templateUrl: base+'edit.html',
             controller: 'PropertiesEditCtrl'
           }).
           otherwise({
@@ -26,18 +26,34 @@
     }])
 
     .controller('PropertiesAddCtrl', ['$scope', '$resource', function($scope, $resource){
-        var api = $resource('/api/v1/properties/');
-        $scope.property = {};
+        var Property = $resource('/api/v1/properties/:id/',
+            {id:'@id'}
+        );
+        $scope.property = new Property();
 
         $scope.createProperty = function(){
-            api.save($scope.property, function(property){
+            $scope.property.$save(function(property){
                 console.log(arguments, 'Saved');
             });
         };
     }])
 
     .controller('PropertiesEditCtrl', ['$scope', '$resource', '$routeParams', function($scope, $resource, $routeParams){
+        var Property = $resource('/api/v1/properties/:id/',
+            {id:'@id'},
+            {
+                'update': { method:'PUT' }
+            }
+        );
+        $scope.property = Property.get({
+            id: $routeParams.propertyID
+        });
 
+        $scope.updateProperty = function(){
+            $scope.property.$update(function(property){
+                console.log(arguments, 'Saved');
+            });
+        };
     }]);
 
 }(PropertiesApp);

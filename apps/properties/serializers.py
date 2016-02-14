@@ -18,9 +18,3 @@ class UnitSerializer(serializers.ModelSerializer):
         exclude = (
             'team',
         )
-
-
-class TenancySerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = models.Tenancy

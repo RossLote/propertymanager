@@ -1,5 +1,6 @@
 <h1>Units</h1>
-<a class="btn btn-primary" href="#/properties">Add New Unit</a>
+<a class="btn btn-primary" href="#/properties/{{property.id}}/units/add">Add New Unit</a>
+<a class="btn btn-primary" href="#/properties/{{property.id}}/edit">Edit Property</a>
 <ul>
     <li ng-repeat="unit in units">
         <a href="#/properties/{{unit.property}}/units/{{unit.id}}">{{unit.id}}</a>

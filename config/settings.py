@@ -54,11 +54,12 @@ LOCAL_APPS = (
     'website',
     'gallery',
     'properties',
+    'lease',
     'contacts',
     'user',
     'teams',
     'dashboard',
-    'functionaltest',
+    'documents',
 )
 
 PROJECT_NAME = 'property manager'

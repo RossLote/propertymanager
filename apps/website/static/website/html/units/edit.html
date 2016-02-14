@@ -1,1 +1,49 @@
 <h1>Edit Unit</h1>
+<form>
+    <div class="form-group">
+        <label for="">Property Name</label>
+        <input type="text" value="{{property.name}}" disabled>
+    </div>
+    <div class="form-group">
+        <label for="">Street Address</label>
+        <input type="text" value="{{property.street}}" disabled>
+    </div>
+    <div class="form-group">
+        <label for="">Unit #</label>
+        <input type="text" value="{{unit.number}}" ng-model="unit.number">
+    </div>
+    <div class="form-group">
+        <label for="">Type</label>
+        <input type="text" value="{{unit.type}}" ng-model="unit.type">
+    </div>
+    <div class="form-group">
+        <label for="">Size</label>
+        <input type="text" value="{{unit.size}}" ng-model="unit.size">
+    </div>
+    <div class="form-group">
+        <label for="">Rent</label>
+        <input type="text" value="{{unit.rent}}" ng-model="unit.rent">
+    </div>
+    <div class="form-group">
+        <label for="">Payment Period</label>
+        <input type="text" value="{{unit.period}}" ng-model="unit.period">
+    </div>
+    <div class="form-group">
+        <label for="">Deposit</label>
+        <input type="text" value="{{unit.deposit}}" ng-model="unit.deposit">
+    </div>
+    <div class="form-group">
+        <label for="">Beds</label>
+        <input type="text" value="{{unit.beds}}" ng-model="unit.beds">
+    </div>
+    <div class="form-group">
+        <label for="">Bath</label>
+        <input type="text" value="{{unit.bathrooms}}" ng-model="unit.bathrooms">
+    </div>
+    <div class="form-group">
+        <label for="">Parking</label>
+        <input type="text" value="{{unit.parking}}" ng-model="unit.parking">
+    </div>
+
+    <button class="btn btn-primary" name="name" ng-click="updateUnit()">Save</button>
+</form>

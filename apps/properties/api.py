@@ -28,9 +28,4 @@ class UnitViewset(TeamedObjectViewsetMixin, viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(team=self.request.team)
-
-
-class TenancyViewset(TeamedObjectViewsetMixin, viewsets.ModelViewSet):
-
-    queryset = models.Tenancy.objects.all()
-    serializer_class = serializers.TenancySerializer
+        
