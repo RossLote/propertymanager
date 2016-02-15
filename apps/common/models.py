@@ -1,7 +1,7 @@
 import uuid
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from softdelete.models import SoftDeleteObject
+from softdelete.models import SoftDeleteObject, SoftDeleteManager
 
 
 # Create your models here.
@@ -23,7 +23,7 @@ class TimeStampedSoftDeleteObject(TimeStampedModel, SoftDeleteObject):
 
     class Meta:
         abstract = True
- 
+
 
 class UUIDObject(TimeStampedSoftDeleteObject):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)

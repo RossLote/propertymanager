@@ -6,7 +6,7 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.core import validators
-from common.models import UUIDObject
+from common.models import UUIDObject, TimeStampedSoftDeleteObject
 from softdelete.models import SoftDeleteManager
 
 
@@ -86,7 +86,7 @@ class AbstractEmailUser(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(
         _('staff status'), default=False, help_text=_(
             'Designates whether the user can log into this admin site.'))
-    
+
     is_active = models.BooleanField(_('active'), default=True, help_text=_(
         'Designates whether this user should be treated as '
         'active. Unselect this instead of deleting accounts.'))
@@ -113,12 +113,12 @@ class AbstractEmailUser(AbstractBaseUser, PermissionsMixin):
     def email_user(self, subject, message, from_email=None, **kwargs):
         """ Send an email to this User."""
         send_mail(subject, message, from_email, [self.email], **kwargs)
-        
+
     def charge(self, amount):
         return True
 
 
-class EmailUser(UUIDObject, AbstractEmailUser):
+class EmailUser(TimeStampedSoftDeleteObject, AbstractEmailUser):
 
     """
     Concrete class of AbstractEmailUser.
@@ -126,7 +126,7 @@ class EmailUser(UUIDObject, AbstractEmailUser):
     Use this if you don't need to extend EmailUser.
 
     """
-    
+
     objects = EmailUserManager()
 
     class Meta(AbstractEmailUser.Meta):

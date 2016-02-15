@@ -13,7 +13,7 @@ class PropertyAttribute(SoftDeleteObject):
     name = models.CharField(max_length=100)
 
 
-class Property(UUIDObject):
+class Property(TimeStampedSoftDeleteObject):
     team = models.ForeignKey('teams.Team', related_name='properties')
     name = models.CharField(max_length=150)
     street = models.CharField(max_length=100)
@@ -37,7 +37,7 @@ class UnitAttribute(SoftDeleteObject):
     name = models.CharField(max_length=100)
 
 
-class Unit(UUIDObject):
+class Unit(TimeStampedSoftDeleteObject):
     PERIODS = PAYMENT_PERIODS
     BEDS = Choices(
         (10, 'studio', _('studio')),

@@ -1,31 +1,10 @@
 from django.db import models
 from django_extensions.db.fields import AutoSlugField
 from django.conf import settings
+from common.models import TimeStampedSoftDeleteObject, SoftDeleteManager
 
 
-def my_import(name):
-    components = name.split('.')
-    mod = __import__(components[0])
-    for comp in components[1:]:
-        mod = getattr(mod, comp)
-    return mod
-try:
-    BaseTeamClass = my_import(settings.TEAM['team_base_class'])
-except:
-    BaseTeamClass = models.Model
-
-try:
-    BaseManagerClass = my_import(settings.TEAM['team_manage_base_class'])
-except:
-    BaseManagerClass = models.Manager
-
-try:
-    BaseTeamUserClass = my_import(settings.TEAM['team_user_base_class'])
-except:
-    BaseTeamUserClass = models.Model
-
-
-class TeamManager(BaseManagerClass):
+class TeamManager(SoftDeleteManager):
     def create(self, user, name):
         team = super(TeamManager, self).create(name=name)
         team_user = team.users.create(
@@ -39,7 +18,7 @@ class TeamManager(BaseManagerClass):
         return team
 
 
-class Team(BaseTeamClass):
+class Team(TimeStampedSoftDeleteObject):
     name = models.CharField(max_length=255)
     slug = AutoSlugField(populate_from='name')
 
@@ -53,7 +32,7 @@ class Team(BaseTeamClass):
         return self.teamowner.teamuser.user
 
 
-class TeamUser(BaseTeamUserClass):
+class TeamUser(TimeStampedSoftDeleteObject):
     team = models.ForeignKey(
         Team, related_name='users'
     )
@@ -75,7 +54,7 @@ class TeamUser(BaseTeamUserClass):
         return self.admin or self.is_owner
 
 
-class TeamOwner(models.Model):
+class TeamOwner(TimeStampedSoftDeleteObject):
     teamuser = models.OneToOneField(TeamUser)
     team = models.OneToOneField(Team)
 

@@ -9,7 +9,7 @@ from .utils import TITLE_LIST
 # Create your models here.
 
 
-class Person(UUIDObject):
+class Person(TimeStampedSoftDeleteObject):
     title = models.PositiveSmallIntegerField(choices=TITLE_LIST)
     forename = models.CharField(max_length=40)
     middlenames = models.CharField(max_length=150, blank=True)

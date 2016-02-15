@@ -1,13 +1,13 @@
 from __future__ import unicode_literals
 
-from common.models import UUIDObject
+from common.models import UUIDObject, TimeStampedSoftDeleteObject
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.dispatch import receiver
 from django.db.models.signals import pre_save
 
 
-class Gallery(UUIDObject):
+class Gallery(TimeStampedSoftDeleteObject):
     team = models.ForeignKey('teams.Team', related_name='galleries')
     title = models.CharField(
         _('title'), max_length=200,
@@ -24,7 +24,7 @@ class Gallery(UUIDObject):
         return [image for image in self.images.all()]
 
 
-class Image(UUIDObject):
+class Image(TimeStampedSoftDeleteObject):
     title = models.CharField(
         _('title'), max_length=200,
         default=None, null=True, blank=True
